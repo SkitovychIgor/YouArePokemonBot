@@ -8,8 +8,8 @@ import time           # для роботи таймера сну
 
 
 # Зберігаємо ТОКЕН в змінну TOKEN та user_id адміністратора в змінну admin_id
-TOKEN = "975011749:AAEbBs_ijmHJphZwpiRQxe9rcuexoFr__k8"
-admin_id = 303694396
+TOKEN = "975011749:AAEbBs_ijmHJphZwpiRQxe9rcuexoFr__k8" # <--- YOUR TOKEN
+admin_id = 303694396  # <--- YOUR USER ID
 bot = telebot.TeleBot(TOKEN, threaded=False)
 # getMe
 user = bot.get_me()
@@ -40,7 +40,7 @@ def handle_docs_photo(message):
     bot.reply_to(message, "Я знайшов " + pk_qty + "!")
     # Якщо на фото є обличя:
     if pk_qty != '0':
-        photo_out = open('/home/pi/mybot/out/' + file_name_by_id, 'rb')
+        photo_out = open('/home/pi/mybot/out/' + file_name_by_id, 'rb') # best way use join for path
         # Відправляємо фінальне зображення
         bot.send_photo(chat_id=message.chat.id, photo=photo_out)
         # Видаляємо зображення з серверу
@@ -58,14 +58,14 @@ def search_faces(image_path, file_name):
     gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
     faces = face_cascade.detectMultiScale(
         gray,
-        scaleFactor=1.1,
-        minNeighbors=9,
-        minSize=(10, 10)
+        scaleFactor=1.1,   # <-- scale ratio for new face finding cicle
+        minNeighbors=9,    # <-- accuracy 
+        minSize=(10, 10)   # <-- Min size of face in pixels
     )
     faces_detected = str(format(len(faces)))
     # Зберігаємо шлях до фото в змінну
-    background = Image.open('/home/pi/mybot/in/received/photos/' + file_name)
-    foreground = Image.open('/home/pi/mybot/out/pokemons/1.png')
+    background = Image.open('/home/pi/mybot/in/received/photos/' + file_name) # <-- background image
+    foreground = Image.open('/home/pi/mybot/out/pokemons/1.png')              # <-- foreground image
     # Визнчаємо для кожного обличчя випадкову картинку зі списку
     for (x, y, w, h) in faces:
         foreground = Image.open(random.choice(['/home/pi/mybot/out/pokemons/1.png',
@@ -137,4 +137,4 @@ while True:
         bot.polling(none_stop=True)
     except Exception as e:
         print(e)
-        time.sleep(15)
+        time.sleep(15)  # <-- Wake up after 15 for prevent crashing
