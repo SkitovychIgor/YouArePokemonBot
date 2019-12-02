@@ -24,7 +24,7 @@ def send_welcome(message):
     bot.reply_to(message, "Надішли ботові фотогафію для поке-сканування")
 
 
-# Receive photo from user
+#  Отримуємо зображення від користувача
 @bot.message_handler(content_types=['photo'])
 def handle_docs_photo(message):
     file_info = bot.get_file(message.photo[len(message.photo)-1].file_id)
