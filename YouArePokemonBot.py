@@ -8,7 +8,7 @@ import time           # для роботи таймера сну
 
 
 # Зберігаємо ТОКЕН в змінну TOKEN та user_id адміністратора в змінну admin_id
-TOKEN = "975011749:AAEbBs_ijmHJphZwpiRQxe9rcuexoFr__k8"
+TOKEN = "Не пали ключ, умник"
 admin_id = 303694396
 bot = telebot.TeleBot(TOKEN, threaded=False)
 # getMe
